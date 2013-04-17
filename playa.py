@@ -2,6 +2,7 @@ import os
 import flask
 import jinja2
 import json
+import argparse
 
 app = flask.Flask(__name__)
 env = jinja2.Environment(
@@ -17,7 +18,7 @@ def is_music(f):
 @app.route('/m/<path:path>')
 def m(path):
     return flask.Response(
-        open(os.path.join('/home/tom/mp3', path)).read(),
+        open(os.path.join(app.config.music_path, path)).read(),
         200,
         headers={
             'Accept-Ranges':'bytes',
@@ -28,7 +29,7 @@ def m(path):
 @app.route('/music')
 def all_music():
     songs = []
-    for dir, dirs, files in os.walk('/home/tom/mp3'):
+    for dir, dirs, files in os.walk(app.config.music_path):
         for path in files:
             if not is_music(path):
                 continue
@@ -51,5 +52,13 @@ def serve():
 
 
 if __name__ == '__main__':
-    app.debug = True
+    parser = argparse.ArgumentParser(description='Export music collection.')
+    parser.add_argument(
+        'music_path', metavar='MUSIC_PATH', type=str,
+        help='root of your music collection'
+    )
+
+    args = parser.parse_args()
+
+    app.config.music_path = args.music_path
     app.run(host='0.0.0.0', port=8000)
