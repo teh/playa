@@ -1,0 +1,22 @@
+body {
+  margin: 0px;
+  font-family: "open sans", sans-serif;
+}
+
+header {
+  position: fixed;
+  padding: 10px;
+  background: #999;
+  overflow: hidden;
+  width: 100%;
+  top: 0px;
+}
+
+ul {
+  list-style: none;
+  padding: 40px 10px;
+}
+
+ul li:nth-child(odd) {
+  background: #eee;
+}

@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app="playa">
+  <head>
+    <script src="/static/angular.min.js"></script>
+    <script src="/static/playa.js"></script>
+    <link rel="stylesheet" href="/static/playa.css">
+  </head>
+  <body>
+    <div ng-controller="PlaylistController">
+      <header>
+        {{ currentTitle }}<br>
+        <audio id="audio"  src="/m/{{ src }}" preload="auto" controls>not supported</audio>
+      </header>
+      <ul>
+        <li ng-repeat="entry in playlist">
+          <div ng-click="onPlay(entry.path, entry.title)" data-path="{{ entry.path }}">{{ entry.title }}</div>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
