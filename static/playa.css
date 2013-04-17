@@ -18,7 +18,17 @@ header h1 {
 }
 
 header audio {
+  display: block;
+  float: left;
   min-height: 30px;
+}
+
+header #next {
+  height: 30px;
+  display: block;
+  float: left;
+  -webkit-appearance: none;
+  background: #eee;
 }
 
 ul {

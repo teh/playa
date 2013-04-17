@@ -10,6 +10,7 @@
       <header>
         <h1>{{ currentTitle }}</h1>
         <audio id="audio" audio-controls src="/m{{ src }}" preload="auto" controls>not supported</audio>
+        <button id="next" ng-click="onNext()">Next</button>
       </header>
       <ul>
         <li ng-repeat="entry in playlist">

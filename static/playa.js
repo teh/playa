@@ -36,8 +36,9 @@ var PlaylistController = function($scope, $http) {
             if (e.title == $scope.currentTitle) {
                 e = $scope.playlist[i + 1]
                 $scope.onPlay(e.path, e.title)
-                return
+                return false
             }
         }
+        return false
     }
 }
