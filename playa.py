@@ -62,4 +62,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     app.config.music_path = args.music_path
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=8000, threaded=True)
