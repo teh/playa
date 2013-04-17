@@ -18,7 +18,7 @@ def is_music(f):
 @app.route('/m/<path:path>')
 def m(path):
     return flask.Response(
-        open(os.path.join(app.config.music_path, path)).read(),
+        open('/' + path).read(),
         200,
         headers={
             'Accept-Ranges':'bytes',
@@ -30,7 +30,8 @@ def m(path):
 def all_music():
     songs = []
     for dir, dirs, files in os.walk(app.config.music_path):
-        for path in files:
+        for filename in files:
+            path = os.path.join(dir, filename)
             if not is_music(path):
                 continue
             songs.append({
@@ -39,7 +40,7 @@ def all_music():
             })
                         
     data = {
-        'songs': songs,
+        'songs': sorted(songs, key=lambda x: x['path']),
     }
     return flask.Response(
         json.dumps(data),
