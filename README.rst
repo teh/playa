@@ -4,6 +4,7 @@ what is it
 It's a trivial music player. Run it on a path, e.g.
 
 ::
+
     python playa.py /home/tom/Music
 
 load up localhost:8000 in a modern-ish browser and voila.
