@@ -26,9 +26,15 @@ ul {
   padding: 40px 10px;
 }
 
-ul li {
+ul li div {
   padding: 6px;
 }
+
+div.active {
+  background: #666;
+  color: #fff;
+}
+
 
 ul li:nth-child(odd) {
   background: #eee;

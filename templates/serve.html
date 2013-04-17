@@ -13,7 +13,10 @@
       </header>
       <ul>
         <li ng-repeat="entry in playlist">
-          <div ng-click="onPlay(entry.path, entry.title)" data-path="{{ entry.path }}">{{ entry.title }}</div>
+          <div ng-click="onPlay(entry.path, entry.title)"
+               data-path="{{ entry.path }}"
+               class="{{ entry.title == currentTitle && 'active' || 'inactive' }}">
+            {{ entry.title }}</div>
         </li>
       </ul>
     </div>
