@@ -12,9 +12,22 @@ header {
   top: 0px;
 }
 
+header h1 {
+  font-size: 12pt;
+  margin: 0px;
+}
+
+header audio {
+  min-height: 30px;
+}
+
 ul {
   list-style: none;
   padding: 40px 10px;
+}
+
+ul li {
+  padding: 6px;
 }
 
 ul li:nth-child(odd) {
