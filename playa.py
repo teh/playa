@@ -3,6 +3,7 @@ import flask
 import jinja2
 import json
 import argparse
+import re
 
 app = flask.Flask(__name__)
 env = jinja2.Environment(
@@ -17,13 +18,23 @@ def is_music(f):
 
 @app.route('/m/<path:path>')
 def m(path):
+    range = flask.request.headers.get('Range')
+    length = len(open('/' + path).read())
+
+    if range is None:
+        data = open('/' + path).read()
+        a, b = 0, len(data)
+    else:
+        a, b = re.search('bytes=(\d+)-(\d+)', range).groups()
+        data = open('/' + path).read()[int(a):int(b)+1]
+        
     return flask.Response(
-        open('/' + path).read(),
-        200,
-        headers={
-            'Accept-Ranges':'bytes',
-        },
+        data,
+        206,
         mimetype='audio/mpeg',
+        headers={
+            'Content-Range': 'bytes {}-{}/{}'.format(a, b, length),
+        }
     )
 
 @app.route('/music')
@@ -60,6 +71,6 @@ if __name__ == '__main__':
     )
 
     args = parser.parse_args()
-
+    app.debug = True
     app.config.music_path = args.music_path
     app.run(host='0.0.0.0', port=8000, threaded=True)
