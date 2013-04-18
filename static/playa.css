@@ -38,6 +38,7 @@ ul {
 
 ul li div {
   padding: 6px;
+  cursor: pointer;
 }
 
 div.active {
